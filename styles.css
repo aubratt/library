@@ -68,3 +68,12 @@ h6 {
 }
 
 /* Library App */
+:root {
+    --primary-bg-color: #121212;
+    --secondary-bg-color: #282828;
+    --primary-font-color: #E1B111;
+}
+
+body {
+    background-color: var(--primary-bg-color);
+}
