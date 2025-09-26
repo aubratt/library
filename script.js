@@ -5,6 +5,7 @@ function Book(title, author) {
         throw Error("You must use the 'new' operator to call the constructor");
     }
     
+    this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
 }
