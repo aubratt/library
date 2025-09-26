@@ -100,7 +100,8 @@ body {
     /* #header grid */
     grid-area: 1 / 1 / 2 / 2;
 
-    color: var(--primary-font-color);
+    background-color: var(--primary-font-color);
+    color: var(--primary-bg-color);
     border-bottom: 1px solid var(--primary-font-color);
 }
 
@@ -116,6 +117,7 @@ body {
     align-items: center;
     justify-items: center;
 
+    background-color: var(--primary-font-color);
     border-bottom: 1px solid var(--primary-font-color);
     padding-right: 4px;
 }
