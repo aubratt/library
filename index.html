@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Library</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">LIBRARY</div>
+            <img id="add-book" src="icons/add.png" alt="Add book button">
+        </div>
+        <div id="greeting">HI, USERNAME</div>
+        <div id="library-name">My Library</div>
+        <div id="sort-btns">
+            <div class="sort-btn">
+                <div>Title</div>
+                <img src="icons/sort.png" alt="">
+            </div>
+            <div class="sort-btn">
+                <div>Author</div>
+                <img src="icons/sort.png" alt="">
+            </div>
+            <div class="sort-btn">
+                <div>Pages</div>
+                <img src="icons/sort.png" alt="">
+            </div>
+            <div class="sort-btn">
+                <div>Status</div>
+                <img src="icons/sort.png" alt="">
+            </div>
+        </div>
+        <hr>
+        <div id="bookshelf"></div>
+    </body>
 </html>

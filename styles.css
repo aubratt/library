@@ -47,3 +47,100 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Library */
+:root {
+    --bg-primary: #262017;
+    --bg-secondary: #3B352C;
+
+    --font-primary: #F0AE2C;
+    --font-secondary: #FFDAA5;
+
+    --btn-border: #67625B;
+}
+
+body {
+    background-color: var(--bg-primary);
+    font-family: "DM Sans";
+}
+
+/* --- Header --- */
+
+#header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+
+    background-color: var(--bg-secondary);
+    color: var(--font-primary);
+    font-size: 20px;
+    font-weight: bold;
+    height: 70px;
+    padding: 0 28px;
+}
+
+#add-book {
+    /* #header grid */
+    justify-self: end;
+}
+
+/* --- END Header --- */
+
+/* --- Greeting --- */
+
+#greeting {
+    color: var(--font-secondary);
+    font-size: 14px;
+    padding-top: 14px;
+    padding-left: 28px;
+}
+
+/* --- END Greeting --- */
+
+/* --- Library Name --- */
+
+#library-name {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 28px;
+}
+
+/* --- END Library Name --- */
+
+/* --- Sort Buttons --- */
+
+#sort-btns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 80px);
+    gap: 8px;
+
+    padding-top: 4px;
+    padding-left: 28px;
+}
+
+#sort-btns .sort-btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--btn-border);
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    text-align: start;
+    width: 80px;
+    padding: 4px 8px;
+}
+
+#sort-btns img {
+    justify-self: end;
+    width: 14px;
+}
+
+/* --- END Sort Buttons --- */
+
+hr {
+    color: var(--btn-border);
+    height: 1px;
+    margin: 8px 28px;
+}
