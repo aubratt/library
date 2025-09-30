@@ -95,7 +95,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     height: 70px;
-    padding: 0 28px;
+    padding: 0 10%;
 }
 
 #add-book {
@@ -113,7 +113,7 @@ body {
     color: var(--font-secondary);
     font-size: 14px;
     padding-top: 14px;
-    padding-left: 28px;
+    padding-left: 10%;
 }
 
 /* --- END Greeting --- */
@@ -124,7 +124,8 @@ body {
     color: white;
     font-size: 24px;
     font-weight: bold;
-    padding-left: 28px;
+    margin-top: -6px;
+    padding-left: 10%;
 }
 
 /* --- END Library Name --- */
@@ -136,7 +137,7 @@ body {
     grid-template-columns: repeat(auto-fit, 80px);
     gap: 8px;
     padding-top: 2px;
-    padding-left: 28px;
+    padding-left: 10%;
 }
 
 #sort-btns .sort-btn {
@@ -144,6 +145,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
 
+    cursor: pointer;
     background-color: var(--bg-secondary);
     border: 1px solid var(--btn-border);
     border-radius: 5px;
@@ -163,7 +165,51 @@ hr {
     background-color: var(--btn-border);
     border: none;
     height: 1px;
-    margin: 8px 28px;
+    margin: 8px 10%;
 }
 
 /* --- END Sort Buttons --- */
+
+/* --- Bookshelf --- */
+
+#bookshelf {
+    padding: 0 10%;
+}
+
+.book {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    background-color: var(--bg-secondary);
+    color: white;
+    border-radius: 10px;
+    font-size: 13px;
+    padding: 16px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.author,
+.pages,
+.status {
+    color: lightgray;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    cursor: pointer;
+    font-style: italic;
+}
+
+.status img {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- END Bookshelf --- */
