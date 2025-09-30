@@ -86,6 +86,9 @@ body {
 /* --- Header --- */
 
 #header {
+    position: sticky;
+    top: 0;
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
@@ -173,7 +176,10 @@ hr {
 /* --- Bookshelf --- */
 
 #bookshelf {
-    padding: 0 10%;
+    display: grid;
+    gap: 8px;
+
+    padding: 0 10% 10%;
 }
 
 .book {
