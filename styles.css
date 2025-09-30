@@ -69,14 +69,14 @@ h6 {
 
 /* Library */
 :root {
-    --bg-primary: #1D2A34;
-    --bg-secondary: #24435A;
-    --bg-tertiary: #333E48;
+    --bg-primary: #1d2a34;
+    --bg-secondary: #24435a;
+    --bg-tertiary: #333e48;
 
-    --font-primary: #A7C2DB;
-    --font-secondary: #CBD2D8;
+    --font-primary: #a7c2db;
+    --font-secondary: #cbd2d8;
 
-    --btn-border: #616A71;
+    --btn-border: #616a71;
 }
 
 body {
@@ -95,7 +95,7 @@ body {
     align-items: center;
 
     background-color: var(--bg-secondary);
-    color: #A7C2DB;
+    color: #a7c2db;
     font-size: 20px;
     font-weight: bold;
     height: 70px;
@@ -238,7 +238,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     background-color: var(--bg-tertiary);
     color: white;
     border-radius: 10px;
@@ -256,6 +256,12 @@ hr {
     color: lightgray;
 }
 
+.book-options {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+}
+
 .status {
     display: flex;
     align-items: center;
@@ -265,9 +271,15 @@ hr {
     font-style: italic;
 }
 
-.status img {
-    width: 14px;
-    height: 14px;
+.edit {
+    width: 16px;
+    height: 16px;
+}
+
+.delete {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
 }
 
 /* --- END Bookshelf --- */
