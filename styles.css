@@ -69,13 +69,14 @@ h6 {
 
 /* Library */
 :root {
-    --bg-primary: #262017;
-    --bg-secondary: #3b352c;
+    --bg-primary: #1D2A34;
+    --bg-secondary: #24435A;
+    --bg-tertiary: #333E48;
 
-    --font-primary: #f0ae2c;
-    --font-secondary: #ffdaa5;
+    --font-primary: #A7C2DB;
+    --font-secondary: #CBD2D8;
 
-    --btn-border: #67625b;
+    --btn-border: #616A71;
 }
 
 body {
@@ -94,7 +95,7 @@ body {
     align-items: center;
 
     background-color: var(--bg-secondary);
-    color: var(--font-primary);
+    color: #A7C2DB;
     font-size: 20px;
     font-weight: bold;
     height: 70px;
@@ -109,6 +110,57 @@ body {
 }
 
 /* --- END Header --- */
+
+/* --- New Book Form --- */
+
+#new-book-form {
+    position: sticky;
+    top: 70px;
+
+    display: grid;
+    justify-content: end;
+    gap: 8px;
+
+    background-color: var(--bg-secondary);
+    padding: 0 10% 32px;
+}
+
+#form-title {
+    color: var(--font-primary);
+    font-weight: bold;
+}
+
+.input-div {
+    display: grid;
+    grid-template-columns: 60px 196px;
+    align-items: center;
+
+    color: var(--font-secondary);
+}
+
+.input-div input {
+    all: unset;
+    background-color: var(--bg-primary);
+    color: lightgray;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.input-div input::placeholder {
+    font-style: italic;
+}
+
+.confirm-btn {
+    justify-self: end;
+
+    cursor: pointer;
+    background-color: var(--font-primary);
+    color: var(--bg-primary);
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+/* --- END New Book Form --- */
 
 /* --- Greeting --- */
 
@@ -149,7 +201,7 @@ body {
     align-items: center;
 
     cursor: pointer;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-tertiary);
     border: 1px solid var(--btn-border);
     border-radius: 5px;
     color: white;
@@ -187,7 +239,7 @@ hr {
     align-items: center;
     justify-content: space-between;
     
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-tertiary);
     color: white;
     border-radius: 10px;
     font-size: 13px;
