@@ -147,6 +147,12 @@ body {
     padding: 4px 8px;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .input-div input::placeholder {
     font-style: italic;
 }
@@ -243,7 +249,7 @@ hr {
     display: grid;
     gap: 8px;
 
-    padding: 0 10% 32px; 
+    padding: 0 10% 32px;
 }
 
 #no-books-text {

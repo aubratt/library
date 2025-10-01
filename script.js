@@ -36,6 +36,7 @@ function showAndHideNewBookForm() {
         pagesLabel.textContent = "Pages";
         const pagesInput = document.createElement("input");
         pagesInput.id = "pages-value";
+        pagesInput.type = "number";
         pagesInput.placeholder = "Pages";
         pagesDiv.appendChild(pagesLabel);
         pagesDiv.appendChild(pagesInput);
@@ -223,8 +224,6 @@ function listenForFormRefocus() {
 }
 
 function removeMessage() {
-    console.log("triggered");
-
     // Check if message div is visible
     const messageVisible = document.getElementById("message-div");
 
