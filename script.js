@@ -68,6 +68,8 @@ function showAndHideNewBookForm() {
         header.parentNode.insertBefore(newBookForm, greeting);
 
         addBook.style.rotate = "45deg";
+
+        listenForFormRefocus();
     } else {
         formVisible.remove();
         addBook.style.rotate = "0deg";
@@ -206,6 +208,35 @@ function addBookToLibrary() {
     document.getElementById("author-value").value = "";
     document.getElementById("pages-value").value = "";
     document.getElementById("status-value").value = "";
+}
+
+function listenForFormRefocus() {
+    const titleInput = document.getElementById("title-value");
+    const authorInput = document.getElementById("author-value");
+    const pagesInput = document.getElementById("pages-value");
+    const statusInput = document.getElementById("status-value");
+
+    titleInput.addEventListener("focus", removeMessage);
+    authorInput.addEventListener("focus", removeMessage);
+    pagesInput.addEventListener("focus", removeMessage);
+    statusInput.addEventListener("focus", removeMessage);
+}
+
+function removeMessage() {
+    console.log("triggered");
+
+    // Check if message div is visible
+    const messageVisible = document.getElementById("message-div");
+
+    // If visible, remove message
+    if (messageVisible) {
+        const newBookForm = document.getElementById("new-book-form");
+        const message = document.getElementById("message-div");
+        const confirmBtn = document.getElementById("confirm-btn");
+
+        newBookForm.appendChild(confirmBtn);
+        newBookForm.removeChild(message);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
