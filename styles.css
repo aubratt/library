@@ -122,7 +122,8 @@ body {
     gap: 8px;
 
     background-color: var(--bg-secondary);
-    padding: 0 10% 32px;
+    font-size: 14px;
+    padding: 0 10% 20px;
 }
 
 #form-title {
@@ -150,7 +151,7 @@ body {
     font-style: italic;
 }
 
-.confirm-btn {
+#confirm-btn {
     justify-self: end;
 
     cursor: pointer;
@@ -158,6 +159,17 @@ body {
     color: var(--bg-primary);
     border-radius: 8px;
     padding: 4px 8px;
+}
+
+#message-div {
+    display: grid;
+    grid-template-columns: 188px 68px;
+    align-items: center;
+}
+
+#message-text {
+    color: white;
+    font-style: italic;
 }
 
 /* --- END New Book Form --- */
@@ -231,7 +243,13 @@ hr {
     display: grid;
     gap: 8px;
 
-    padding: 0 10% 10%;
+    padding: 0 10% 32px; 
+}
+
+#no-books-text {
+    color: lightgray;
+    font-style: italic;
+    margin-top: -6px;
 }
 
 .book {
