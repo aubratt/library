@@ -181,7 +181,7 @@ function addBookToLibrary() {
     const titleValue = document.getElementById("title-value").value;
     const authorValue = document.getElementById("author-value").value;
     const pagesValue = document.getElementById("pages-value").value;
-    const statusValue = document.getElementById("status-value").value;
+    const statusValue = document.getElementById("status-value").textContent;
 
     const messageDiv = document.createElement("div");
     messageDiv.id = "message-div";
