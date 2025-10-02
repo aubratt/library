@@ -59,7 +59,6 @@ function showAndHideNewBookForm() {
         dropIcon.alt = "Dropdown icon";
         statusValueWrapper.appendChild(statusValue);
         statusValueWrapper.appendChild(dropIcon);
-
         statusValueWrapper.addEventListener("click", handleDropdownSelection);
 
         statusDiv.appendChild(statusLabel);
@@ -123,17 +122,19 @@ function handleDropdownSelection() {
         statusDiv.appendChild(notStarted);
         statusDiv.appendChild(reading);
         statusDiv.appendChild(finished);
-
-        document.addEventListener("click", (event) => {
-            if (event.target.classList.contains("dropdown-option")) {
-                document.getElementById("status-value").textContent = event.target.textContent;
-            } 
-        });
     }
+
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("dropdown-option")) {
+            document.getElementById("status-value").textContent = event.target.textContent;
+            hideDropdownList();
+        } else if (event.target.id !== "status-value-wrapper") {
+            hideDropdownList();
+        }
+    });
 }
 
 function hideDropdownList() {
-    console.log("hello");
     const statusDiv = document.getElementById("status-div");
     const statusValueWrapper = document.getElementById("status-value-wrapper");
     statusValueWrapper.addEventListener("click", handleDropdownSelection);
