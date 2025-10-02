@@ -163,6 +163,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .dropdown-visible {
     display: grid;
     grid-template: repeat(4, 29px) / 60px 196px;
+    align-items: center;
 
     color: var(--font-secondary);
 }
@@ -231,7 +232,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #message-text {
-    color: white;
+    color: var(--font-secondary);
     font-style: italic;
 }
 

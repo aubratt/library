@@ -41,8 +41,6 @@ function showAndHideNewBookForm() {
         pagesDiv.appendChild(pagesLabel);
         pagesDiv.appendChild(pagesInput);
 
-        // ----------
-
         const statusDiv = document.createElement("div");
         statusDiv.id = "status-div";
         statusDiv.classList = "input-div dropdown-hidden";
@@ -56,16 +54,16 @@ function showAndHideNewBookForm() {
         statusValue.id = "status-value";
         statusValue.textContent = "Not Started";
         const dropIcon = document.createElement("img");
+        dropIcon.id = "dropdown-icon";
         dropIcon.src = "icons/drop.png";
         dropIcon.alt = "Dropdown icon";
         statusValueWrapper.appendChild(statusValue);
         statusValueWrapper.appendChild(dropIcon);
-        statusValueWrapper.addEventListener("click", showAndHideDropdownList);
+
+        statusValueWrapper.addEventListener("click", handleDropdownSelection);
 
         statusDiv.appendChild(statusLabel);
         statusDiv.appendChild(statusValueWrapper);
-
-        // ----------
 
         const confirmBtn = document.createElement("div");
         confirmBtn.id = "confirm-btn";
@@ -93,11 +91,13 @@ function showAndHideNewBookForm() {
     }
 }
 
-function showAndHideDropdownList() {
+function handleDropdownSelection() {
     // #status-value-wrapper was just clicked...
 
     const statusDiv = document.getElementById("status-div");
     const statusValueWrapper = document.getElementById("status-value-wrapper");
+    statusValueWrapper.removeEventListener("click", handleDropdownSelection);
+    statusValueWrapper.addEventListener("click", hideDropdownList);
 
     // if #status-div has .dropdown-hidden, show the dropdown options
     if (statusDiv.classList.contains("dropdown-hidden")) {
@@ -123,30 +123,30 @@ function showAndHideDropdownList() {
         statusDiv.appendChild(notStarted);
         statusDiv.appendChild(reading);
         statusDiv.appendChild(finished);
-    }
 
-    const dropdownOptions = document.querySelectorAll(".dropdown-option");
-    dropdownOptions.forEach((option) => {
-        option.addEventListener("click", () => {
-            const optionText = option.textContent;
-            document.getElementById("status-value").textContent = optionText;
-
-            statusDiv.classList = "input-div dropdown-hidden";
-            statusValueWrapper.style.borderBottomLeftRadius = "8px";
-            statusValueWrapper.style.borderBottomRightRadius = "8px";
-
-            dropdownOptions.forEach((option) => {
-                option.remove();
-            });
+        document.addEventListener("click", (event) => {
+            if (event.target.classList.contains("dropdown-option")) {
+                document.getElementById("status-value").textContent = event.target.textContent;
+            } 
         });
-    });
+    }
 }
 
-// if #status-div has .dropdown-visible, listen for...
-// .dropdown-option click => populate #status-value with the selected option & hide dropdown options
-// #status-value wrapper click
-// OR window click outside of #status-value-wrapper
-// OR window click outside of dropdown options
+function hideDropdownList() {
+    console.log("hello");
+    const statusDiv = document.getElementById("status-div");
+    const statusValueWrapper = document.getElementById("status-value-wrapper");
+    statusValueWrapper.addEventListener("click", handleDropdownSelection);
+    const dropdownOptions = document.querySelectorAll(".dropdown-option");
+
+    statusDiv.classList = "input-div dropdown-hidden";
+    statusValueWrapper.style.borderBottomLeftRadius = "8px";
+    statusValueWrapper.style.borderBottomRightRadius = "8px";
+
+    dropdownOptions.forEach((option) => {
+        option.remove();
+    });
+}
 
 const myLibrary = [];
 
@@ -164,6 +164,7 @@ function Book(title, author, pages, status) {
 
 function addBookToLibrary() {
     // Confirm button was just clicked...
+    hideDropdownList();
 
     // Clear form error message if there is one
     const newBookForm = document.getElementById("new-book-form");
