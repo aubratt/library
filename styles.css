@@ -154,8 +154,65 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .input-div input::placeholder {
+    color: gray;
     font-style: italic;
 }
+
+/* dropdown */
+
+.dropdown-visible {
+    display: grid;
+    grid-template: repeat(4, 29px) / 60px 196px;
+
+    color: var(--font-secondary);
+}
+
+#not-started {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+#reading {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+#finished {
+    grid-area: 4 / 2 / 5 / 3;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.dropdown-option {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    color: lightgray;
+    padding: 4px 8px;
+}
+
+.dropdown-option:hover {
+    background-color: var(--font-primary);
+    color: var(--bg-primary);
+}
+
+#status-value-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    color: gray;
+    border-radius: 8px;
+    font-style: italic;
+    height: 29px;
+    padding: 4px 8px;
+}
+
+#status-value {
+    color: lightgray;
+    font-style: normal;
+}
+
+/* END dropdown */
 
 #confirm-btn {
     justify-self: end;

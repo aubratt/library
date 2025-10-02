@@ -41,15 +41,31 @@ function showAndHideNewBookForm() {
         pagesDiv.appendChild(pagesLabel);
         pagesDiv.appendChild(pagesInput);
 
+        // ----------
+
         const statusDiv = document.createElement("div");
-        statusDiv.className = "input-div";
+        statusDiv.id = "status-div";
+        statusDiv.classList = "input-div dropdown-hidden";
+
         const statusLabel = document.createElement("label");
         statusLabel.textContent = "Status";
-        const statusInput = document.createElement("input");
-        statusInput.id = "status-value";
-        statusInput.placeholder = "Status";
+
+        const statusValueWrapper = document.createElement("div");
+        statusValueWrapper.id = "status-value-wrapper";
+        const statusValue = document.createElement("div");
+        statusValue.id = "status-value";
+        statusValue.textContent = "Not Started";
+        const dropIcon = document.createElement("img");
+        dropIcon.src = "icons/drop.png";
+        dropIcon.alt = "Dropdown icon";
+        statusValueWrapper.appendChild(statusValue);
+        statusValueWrapper.appendChild(dropIcon);
+        statusValueWrapper.addEventListener("click", showAndHideDropdownList);
+
         statusDiv.appendChild(statusLabel);
-        statusDiv.appendChild(statusInput);
+        statusDiv.appendChild(statusValueWrapper);
+
+        // ----------
 
         const confirmBtn = document.createElement("div");
         confirmBtn.id = "confirm-btn";
@@ -77,6 +93,61 @@ function showAndHideNewBookForm() {
     }
 }
 
+function showAndHideDropdownList() {
+    // #status-value-wrapper was just clicked...
+
+    const statusDiv = document.getElementById("status-div");
+    const statusValueWrapper = document.getElementById("status-value-wrapper");
+
+    // if #status-div has .dropdown-hidden, show the dropdown options
+    if (statusDiv.classList.contains("dropdown-hidden")) {
+        statusDiv.className = "dropdown-visible";
+        statusValueWrapper.style.borderBottomLeftRadius = "0";
+        statusValueWrapper.style.borderBottomRightRadius = "0";
+
+        const notStarted = document.createElement("div");
+        notStarted.id = "not-started";
+        notStarted.className = "dropdown-option";
+        notStarted.textContent = "Not Started";
+
+        const reading = document.createElement("div");
+        reading.id = "reading";
+        reading.className = "dropdown-option";
+        reading.textContent = "Reading";
+
+        const finished = document.createElement("div");
+        finished.id = "finished";
+        finished.className = "dropdown-option";
+        finished.textContent = "Finished";
+
+        statusDiv.appendChild(notStarted);
+        statusDiv.appendChild(reading);
+        statusDiv.appendChild(finished);
+    }
+
+    const dropdownOptions = document.querySelectorAll(".dropdown-option");
+    dropdownOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+            const optionText = option.textContent;
+            document.getElementById("status-value").textContent = optionText;
+
+            statusDiv.classList = "input-div dropdown-hidden";
+            statusValueWrapper.style.borderBottomLeftRadius = "8px";
+            statusValueWrapper.style.borderBottomRightRadius = "8px";
+
+            dropdownOptions.forEach((option) => {
+                option.remove();
+            });
+        });
+    });
+}
+
+// if #status-div has .dropdown-visible, listen for...
+// .dropdown-option click => populate #status-value with the selected option & hide dropdown options
+// #status-value wrapper click
+// OR window click outside of #status-value-wrapper
+// OR window click outside of dropdown options
+
 const myLibrary = [];
 
 function Book(title, author, pages, status) {
@@ -84,7 +155,7 @@ function Book(title, author, pages, status) {
         throw Error("You must use the 'new' operator to call the constructor");
     }
 
-    this.id = crypto.randomUUID();
+    this.id = crypto.randomUUID(); //
     this.title = title;
     this.author = author;
     this.pages = pages;
