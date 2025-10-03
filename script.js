@@ -93,13 +93,16 @@ function showAndHideNewBookForm() {
 function handleDropdownSelection() {
     // #status-value-wrapper was just clicked...
 
+    console.log("hello");
+
     const statusDiv = document.getElementById("status-div");
     const statusValueWrapper = document.getElementById("status-value-wrapper");
-    statusValueWrapper.removeEventListener("click", handleDropdownSelection);
-    statusValueWrapper.addEventListener("click", hideDropdownList);
 
     // if #status-div has .dropdown-hidden, show the dropdown options
     if (statusDiv.classList.contains("dropdown-hidden")) {
+        statusValueWrapper.removeEventListener("click", handleDropdownSelection);
+        statusValueWrapper.addEventListener("click", hideDropdownList);
+
         statusDiv.className = "dropdown-visible";
         statusValueWrapper.style.borderBottomLeftRadius = "0";
         statusValueWrapper.style.borderBottomRightRadius = "0";
@@ -128,7 +131,8 @@ function handleDropdownSelection() {
         if (event.target.classList.contains("dropdown-option")) {
             document.getElementById("status-value").textContent = event.target.textContent;
             hideDropdownList();
-        } else if (event.target.id !== "status-value-wrapper") {
+        } else if (event.target.id !== "status-value-wrapper" && event.target.id !== "status-value" && event.target.id !== "dropdown-icon") {
+            console.log("hello");
             hideDropdownList();
         }
     });
@@ -137,12 +141,18 @@ function handleDropdownSelection() {
 function hideDropdownList() {
     const statusDiv = document.getElementById("status-div");
     const statusValueWrapper = document.getElementById("status-value-wrapper");
-    statusValueWrapper.addEventListener("click", handleDropdownSelection);
     const dropdownOptions = document.querySelectorAll(".dropdown-option");
 
-    statusDiv.classList = "input-div dropdown-hidden";
-    statusValueWrapper.style.borderBottomLeftRadius = "8px";
-    statusValueWrapper.style.borderBottomRightRadius = "8px";
+    if (statusDiv) {
+        statusDiv.classList = "input-div dropdown-hidden";
+        statusValueWrapper.style.borderBottomLeftRadius = "8px";
+        statusValueWrapper.style.borderBottomRightRadius = "8px";
+    }
+
+    if (statusValueWrapper) {
+        statusValueWrapper.removeEventListener("click", hideDropdownList);
+        statusValueWrapper.addEventListener("click", handleDropdownSelection);
+    }
 
     dropdownOptions.forEach((option) => {
         option.remove();
