@@ -344,7 +344,7 @@ hr {
     gap: 19px;
 }
 
-.status {
+.book-dropdown-hidden {
     display: flex;
     align-items: center;
     gap: 2px;
@@ -356,6 +356,45 @@ hr {
 .edit {
     width: 16px;
     height: 16px;
+}
+
+.book-dropdown-visible {
+    display: grid;
+    grid-template: repeat(4, 20px) / 16px 90px;
+    align-items: center;
+    row-gap: 4px;
+}
+
+.book-dropdown-visible .edit {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.book-dropdown-visible .status-text {
+    grid-area: 1 / 2 / 2 / 3;
+
+    font-style: italic;
+    padding: 0 4px;
+}
+
+.book-dropdown-visible .book-dropdown-option {
+    cursor: pointer;
+    background-color: lightgray;
+    color: var(--bg-tertiary);
+    font-style: italic;
+    border-radius: 6px;
+    padding: 0 4px;
+}
+
+.book-dropdown-visible .book-not-started {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.book-dropdown-visible .book-reading {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.book-dropdown-visible .book-finished {
+    grid-area: 4 / 2 / 5 / 3;
 }
 
 .delete {
