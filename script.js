@@ -323,8 +323,6 @@ function removeMessage() {
 }
 
 function showBookStatusDropdown(status) {
-    status.classList = "status book-dropdown-visible";
-
     const notStarted = document.createElement("div");
     notStarted.classList = "book-dropdown-option book-not-started";
     notStarted.textContent = "Not Started";
@@ -335,9 +333,30 @@ function showBookStatusDropdown(status) {
     finished.classList = "book-dropdown-option book-finished";
     finished.textContent = "Finished";
 
+    status.classList = "status book-dropdown-visible";
     status.appendChild(notStarted);
     status.appendChild(reading);
     status.appendChild(finished);
+}
+
+function handleBookStatusDropdown(status) {
+    const dropdownOptions = status.querySelectorAll(".book-dropdown-option");
+    dropdownOptions.forEach(option => {
+        option.addEventListener("click", () => {
+            const statusText = status.querySelector(".status-text");
+            statusText.textContent = option.textContent;
+
+            hideBookStatusDropdown(status, dropdownOptions);
+        });
+    });
+}
+
+function hideBookStatusDropdown(status, dropdownOptions) {
+    status.classList = "status book-dropdown-hidden";
+
+    dropdownOptions.forEach(option => {
+        status.removeChild(option);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -348,6 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // if the book status dropdown is hidden => open the book status dropdown
             if (clickedStatusDiv.classList.contains("book-dropdown-hidden")) {
                 showBookStatusDropdown(clickedStatusDiv);
+                handleBookStatusDropdown(clickedStatusDiv);
             }
 
             // if the book status dropdown is visible => listen for a click
