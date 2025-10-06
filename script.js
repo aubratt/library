@@ -238,7 +238,9 @@ function addBookToLibrary() {
 function renderBooks() {
     const bookshelf = document.getElementById("bookshelf");
     const books = document.querySelectorAll(".book");
-    books.forEach(book => {
+    const overlay = document.querySelector(".overlay");
+
+    books.forEach((book) => {
         bookshelf.removeChild(book);
     });
 
@@ -289,8 +291,11 @@ function renderBooks() {
         newBookDeleteDiv.className = "delete";
 
         const newBookDeleteBtn = document.createElement("img");
+        newBookDeleteBtn.className = "delete-btn";
         newBookDeleteBtn.src = "icons/delete.png";
         newBookDeleteBtn.alt = "Delete button";
+
+        newBookDeleteBtn.addEventListener("click", () => openDeleteModal(newBookDiv));
 
         newBookDeleteDiv.appendChild(newBookDeleteBtn);
 
@@ -303,6 +308,89 @@ function renderBooks() {
         // Append new .book div to #bookshelf
         bookshelf.appendChild(newBookDiv);
     }
+}
+
+function openDeleteModal(book) {
+    const bookshelf = document.getElementById("bookshelf");
+
+    const modal = document.createElement("div");
+    modal.className = "modal";
+
+    const closeBtn = document.createElement("img");
+    closeBtn.className = "btn-close";
+    closeBtn.src = "icons/add.png";
+    closeBtn.alt = "Close modal button";
+    closeBtn.addEventListener("click", closeDeleteModal);
+
+    const confirmText = document.createElement("div");
+    confirmText.className = "confirm-delete-text";
+    confirmText.textContent = "Delete this book?";
+
+    const bookTitle = document.createElement("div");
+    bookTitle.className = "book-title";
+    bookTitle.textContent = book.querySelector(".title").textContent;
+
+    const modalBtns = document.createElement("div");
+    modalBtns.className = "modal-btns";
+
+    const yesBtn = document.createElement("div");
+    yesBtn.classList = "modal-btn yes-btn";
+    yesBtn.textContent = "Yes";
+    yesBtn.addEventListener("click", () => deleteBook(book));
+
+    const noBtn = document.createElement("div");
+    noBtn.classList = "modal-btn no-btn";
+    noBtn.textContent = "No";
+    noBtn.addEventListener("click", closeDeleteModal);
+
+    modalBtns.appendChild(yesBtn);
+    modalBtns.appendChild(noBtn);
+
+    modal.appendChild(closeBtn);
+    modal.appendChild(confirmText);
+    modal.appendChild(bookTitle);
+    modal.appendChild(modalBtns);
+
+    const overlay = document.createElement("div");
+    overlay.className = "overlay";
+    overlay.addEventListener("click", closeDeleteModal);
+
+    bookshelf.appendChild(modal);
+    bookshelf.appendChild(overlay);
+}
+
+function closeDeleteModal() {
+    const bookshelf = document.getElementById("bookshelf");
+    const modal = document.querySelector(".modal");
+    const overlay = document.querySelector(".overlay");
+
+    bookshelf.removeChild(modal);
+    bookshelf.removeChild(overlay);
+}
+
+function deleteBook(book) {
+    const bookshelf = document.getElementById("bookshelf");
+
+    const bookId = book.dataset.id;
+    const bookIndex = myLibrary
+        .map((x) => {
+            return x.id;
+        })
+        .indexOf(bookId);
+
+    myLibrary.splice(bookIndex, 1);
+
+    if (myLibrary.length === 0) {
+        const noBooksText = document.createElement("div");
+        noBooksText.id = "no-books-text";
+        noBooksText.textContent = "Where did the books go?";
+
+        bookshelf.appendChild(noBooksText);
+    }
+
+    bookshelf.removeChild(book);
+
+    closeDeleteModal();
 }
 
 function listenForFormRefocus() {
@@ -379,9 +467,10 @@ function hideBookStatusDropdown(status, dropdownOptions) {
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add-book").addEventListener("click", showAndHideNewBookForm);
+
     document.addEventListener("click", function (event) {
         const bookStatuses = document.querySelectorAll(".status");
-        bookStatuses.forEach(status => {
+        bookStatuses.forEach((status) => {
             hideBookStatusDropdown(status, status.querySelectorAll(".book-dropdown-option"));
         });
 
@@ -391,11 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (clickedStatusDiv.classList.contains("book-dropdown-hidden")) {
                 showBookStatusDropdown(clickedStatusDiv);
                 handleBookStatusDropdown(clickedStatusDiv);
-            } 
-
-            // if the book status dropdown is visible => listen for a click
-            // if click is on one of the dropdown options => populate .status-text with the selected option, close dropdown
-            // if click is outside of the dropdown options => close dropdown
+            }
         }
     });
 });

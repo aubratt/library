@@ -404,3 +404,84 @@ hr {
 }
 
 /* --- END Bookshelf --- */
+
+/* --- Modal --- */
+
+.modal {
+    position: absolute;
+    top: 20%;
+    left: calc(50% - 150px);
+
+    display: grid;
+    grid-template: 35px auto 35px / 5fr 1fr;
+    row-gap: 8px;
+    align-items: center;
+
+    background-color: var(--bg-tertiary);
+    border-radius: 12px;
+    color: var(--font-primary);
+    font-size: 16px;
+    width: 300px;
+    padding: 4px 16px 16px;
+    z-index: 2;
+}
+
+.btn-close {
+    grid-area: 1 / 2 / 2 / 3;
+    align-self: end;
+    justify-self: end;
+    
+    cursor: pointer;
+    rotate: 45deg;
+}
+
+.confirm-delete-text {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: end;
+
+    font-weight: bold;
+}
+
+.book-title {
+    grid-area: 2 / 1 / 3 / 3;
+    
+    text-align: center;
+}
+
+.modal-btns {
+    grid-area: 3 / 1 / 4 / 3;
+    justify-self: center;
+
+    display: flex;
+    gap: 16px;
+}
+
+.modal-btn {
+    cursor: pointer;
+    color: black;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.yes-btn {
+    background-color: tomato;
+}
+
+.no-btn {
+    background-color: lightgray;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+/* --- END Modal --- */
