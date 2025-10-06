@@ -1,3 +1,5 @@
+const myLibrary = [];
+
 function showAndHideNewBookForm() {
     const formVisible = document.getElementById("new-book-form");
     const addBook = document.getElementById("add-book");
@@ -93,8 +95,6 @@ function showAndHideNewBookForm() {
 function handleFormStatusDropdown() {
     // #status-value-wrapper was just clicked...
 
-    console.log("hello");
-
     const statusDiv = document.getElementById("status-div");
     const statusValueWrapper = document.getElementById("status-value-wrapper");
 
@@ -132,7 +132,6 @@ function handleFormStatusDropdown() {
             document.getElementById("status-value").textContent = event.target.textContent;
             hideFormStatusDropdown();
         } else if (event.target.id !== "status-value-wrapper" && event.target.id !== "status-value" && event.target.id !== "dropdown-icon") {
-            console.log("hello");
             hideFormStatusDropdown();
         }
     });
@@ -158,8 +157,6 @@ function hideFormStatusDropdown() {
         option.remove();
     });
 }
-
-const myLibrary = [];
 
 function Book(title, author, pages, status) {
     if (!new.target) {
@@ -221,64 +218,7 @@ function addBookToLibrary() {
         bookshelf.removeChild(noBooksTextVisible);
     }
 
-    // Create new .book div (see comment in #bookshelf for structure) with title, author, pages, and status as text content for their respective elements
-    const newBookDiv = document.createElement("div");
-    newBookDiv.className = "book";
-
-    const newBookInfoDiv = document.createElement("div");
-    newBookInfoDiv.className = "book-info";
-
-    const newBookTitle = document.createElement("div");
-    newBookTitle.className = "title";
-    newBookTitle.textContent = newBook.title;
-
-    const newBookAuthor = document.createElement("div");
-    newBookAuthor.className = "author";
-    newBookAuthor.textContent = newBook.author;
-
-    const newBookPages = document.createElement("div");
-    newBookPages.className = "pages";
-    newBookPages.textContent = `${newBook.pages} pages`;
-
-    newBookInfoDiv.appendChild(newBookTitle);
-    newBookInfoDiv.appendChild(newBookAuthor);
-    newBookInfoDiv.appendChild(newBookPages);
-
-    const newBookOptionsDiv = document.createElement("div");
-    newBookOptionsDiv.className = "book-options";
-
-    const newBookStatusDiv = document.createElement("div");
-    newBookStatusDiv.className = "status";
-
-    const newBookEditBtn = document.createElement("img");
-    newBookEditBtn.className = "edit";
-    newBookEditBtn.src = "icons/edit.png";
-    newBookEditBtn.alt = "Edit button";
-
-    const newBookStatusText = document.createElement("div");
-    newBookStatusText.className = "status-text";
-    newBookStatusText.textContent = newBook.status;
-
-    newBookStatusDiv.appendChild(newBookEditBtn);
-    newBookStatusDiv.appendChild(newBookStatusText);
-
-    const newBookDeleteDiv = document.createElement("div");
-    newBookDeleteDiv.className = "delete";
-
-    const newBookDeleteBtn = document.createElement("img");
-    newBookDeleteBtn.src = "icons/delete.png";
-    newBookDeleteBtn.alt = "Delete button";
-
-    newBookDeleteDiv.appendChild(newBookDeleteBtn);
-
-    newBookOptionsDiv.appendChild(newBookStatusDiv);
-    newBookOptionsDiv.appendChild(newBookDeleteDiv);
-
-    newBookDiv.appendChild(newBookInfoDiv);
-    newBookDiv.appendChild(newBookOptionsDiv);
-
-    // Append new .book div to #bookshelf
-    bookshelf.appendChild(newBookDiv);
+    renderBooks(newBook);
 
     // Display message to the left of confirm button: "Added to library"
     messageText.textContent = "Added to library";
@@ -293,6 +233,76 @@ function addBookToLibrary() {
     document.getElementById("author-value").value = "";
     document.getElementById("pages-value").value = "";
     document.getElementById("status-value").value = "";
+}
+
+function renderBooks() {
+    const bookshelf = document.getElementById("bookshelf");
+    const books = document.querySelectorAll(".book");
+    books.forEach(book => {
+        bookshelf.removeChild(book);
+    });
+
+    for (let i = 0; i < myLibrary.length; i++) {
+        // Create new .book div with title, author, pages, and status as text content for their respective elements
+        const newBookDiv = document.createElement("div");
+        newBookDiv.dataset.id = myLibrary[i].id;
+        newBookDiv.className = "book";
+
+        const newBookInfoDiv = document.createElement("div");
+        newBookInfoDiv.className = "book-info";
+
+        const newBookTitle = document.createElement("div");
+        newBookTitle.className = "title";
+        newBookTitle.textContent = myLibrary[i].title;
+
+        const newBookAuthor = document.createElement("div");
+        newBookAuthor.className = "author";
+        newBookAuthor.textContent = myLibrary[i].author;
+
+        const newBookPages = document.createElement("div");
+        newBookPages.className = "pages";
+        newBookPages.textContent = `${myLibrary[i].pages} pages`;
+
+        newBookInfoDiv.appendChild(newBookTitle);
+        newBookInfoDiv.appendChild(newBookAuthor);
+        newBookInfoDiv.appendChild(newBookPages);
+
+        const newBookOptionsDiv = document.createElement("div");
+        newBookOptionsDiv.className = "book-options";
+
+        const newBookStatusDiv = document.createElement("div");
+        newBookStatusDiv.classList = "status book-dropdown-hidden";
+
+        const newBookEditBtn = document.createElement("img");
+        newBookEditBtn.className = "edit";
+        newBookEditBtn.src = "icons/edit.png";
+        newBookEditBtn.alt = "Edit button";
+
+        const newBookStatusText = document.createElement("div");
+        newBookStatusText.className = "status-text";
+        newBookStatusText.textContent = myLibrary[i].status;
+
+        newBookStatusDiv.appendChild(newBookEditBtn);
+        newBookStatusDiv.appendChild(newBookStatusText);
+
+        const newBookDeleteDiv = document.createElement("div");
+        newBookDeleteDiv.className = "delete";
+
+        const newBookDeleteBtn = document.createElement("img");
+        newBookDeleteBtn.src = "icons/delete.png";
+        newBookDeleteBtn.alt = "Delete button";
+
+        newBookDeleteDiv.appendChild(newBookDeleteBtn);
+
+        newBookOptionsDiv.appendChild(newBookStatusDiv);
+        newBookOptionsDiv.appendChild(newBookDeleteDiv);
+
+        newBookDiv.appendChild(newBookInfoDiv);
+        newBookDiv.appendChild(newBookOptionsDiv);
+
+        // Append new .book div to #bookshelf
+        bookshelf.appendChild(newBookDiv);
+    }
 }
 
 function listenForFormRefocus() {
@@ -341,12 +351,20 @@ function showBookStatusDropdown(status) {
 
 function handleBookStatusDropdown(status) {
     const dropdownOptions = status.querySelectorAll(".book-dropdown-option");
-    dropdownOptions.forEach(option => {
+    dropdownOptions.forEach((option) => {
         option.addEventListener("click", () => {
             const statusText = status.querySelector(".status-text");
             statusText.textContent = option.textContent;
 
+            // Change the Book object's status
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (option.closest(".book").dataset.id === myLibrary[i].id) {
+                    myLibrary[i].status = statusText.textContent;
+                }
+            }
+
             hideBookStatusDropdown(status, dropdownOptions);
+            renderBooks();
         });
     });
 }
@@ -354,7 +372,7 @@ function handleBookStatusDropdown(status) {
 function hideBookStatusDropdown(status, dropdownOptions) {
     status.classList = "status book-dropdown-hidden";
 
-    dropdownOptions.forEach(option => {
+    dropdownOptions.forEach((option) => {
         status.removeChild(option);
     });
 }
@@ -362,13 +380,18 @@ function hideBookStatusDropdown(status, dropdownOptions) {
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add-book").addEventListener("click", showAndHideNewBookForm);
     document.addEventListener("click", function (event) {
+        const bookStatuses = document.querySelectorAll(".status");
+        bookStatuses.forEach(status => {
+            hideBookStatusDropdown(status, status.querySelectorAll(".book-dropdown-option"));
+        });
+
         if (event.target.classList.contains("status") || event.target.classList.contains("edit") || event.target.classList.contains("status-text")) {
             const clickedStatusDiv = event.target.closest(".status");
             // if the book status dropdown is hidden => open the book status dropdown
             if (clickedStatusDiv.classList.contains("book-dropdown-hidden")) {
                 showBookStatusDropdown(clickedStatusDiv);
                 handleBookStatusDropdown(clickedStatusDiv);
-            }
+            } 
 
             // if the book status dropdown is visible => listen for a click
             // if click is on one of the dropdown options => populate .status-text with the selected option, close dropdown
